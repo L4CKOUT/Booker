@@ -1,5 +1,7 @@
 package booker.springframework.Booker.model;
+
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -9,16 +11,19 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.AUTO)//Automatic ID generation
     private Long id;
 
+
     private String FirstName;
     private String LastName;
 
     @ManyToMany(mappedBy = "authors")
-    private Set<Book> Books;
+    private Set<Book> Books = new HashSet<>();
 
 
 
     public Author() {
     }
+
+
 
     public Long getId() {
         return id;
@@ -52,10 +57,10 @@ public class Author {
         Books = books;
     }
 
-    public Author(String firstName, String lastName, Set<Book> books) {
+    public Author(String firstName, String lastName) {
         FirstName = firstName;
         LastName = lastName;
-        Books = books;
+
     }
 
     @Override
